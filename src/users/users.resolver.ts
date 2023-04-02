@@ -1,4 +1,8 @@
-import { CreateUserInput } from './dto/user.input.dto';
+import {
+  CreateUserInput,
+  UpdateUserInput,
+  DeleteUserInput,
+} from './dto/user.input.dto';
 import { GetUserArgs, GetUsersArgs } from './dto/user.args.dto';
 import { UsersService } from './users.service';
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
@@ -21,5 +25,15 @@ export class UsersResolver {
   @Mutation(() => User)
   createUser(@Args('createUserData') createUserData: CreateUserInput): User {
     return this.usersService.createUser();
+  }
+
+  @Mutation(() => User)
+  updateUser(@Args('updateUserData') updateUserData: UpdateUserInput): User {
+    return this.usersService.updateUser();
+  }
+
+  @Mutation(() => User)
+  deleteUser(@Args('deleteUserData') deleteUserData: DeleteUserInput): User {
+    return this.usersService.deleteUser();
   }
 }
