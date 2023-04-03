@@ -2,7 +2,7 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Schema } from 'mongoose';
 
 import { CreateUserInput, UpdateUserInput } from './dto/user.input';
-import { User } from './dto/user.model';
+import { User } from './model/user.model';
 import { UserService } from './user.service';
 
 @Resolver(() => User)

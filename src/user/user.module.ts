@@ -1,4 +1,4 @@
-import { User, UserSchema } from './dto/user.model';
+import { User, UserSchema } from './model/user.model';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Module } from '@nestjs/common';
 import { UserService } from './user.service';
