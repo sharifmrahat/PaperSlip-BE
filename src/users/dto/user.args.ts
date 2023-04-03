@@ -1,16 +1,17 @@
-import { ArgsType, Field } from '@nestjs/graphql';
+import { ArgsType, Field, ID } from '@nestjs/graphql';
 import { IsArray, IsNotEmpty } from 'class-validator';
+import { ObjectId } from 'mongoose';
 
 @ArgsType()
 export class GetUserArgs {
-  @Field(() => String)
+  @Field(() => ID)
   @IsNotEmpty()
-  userId: string;
+  _id: ObjectId;
 }
 
 @ArgsType()
 export class GetUsersArgs {
-  @Field(() => [String])
+  @Field(() => [ID])
   @IsArray()
-  userIds: string[];
+  Ids: ObjectId[];
 }

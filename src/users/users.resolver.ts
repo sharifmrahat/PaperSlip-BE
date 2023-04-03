@@ -1,39 +1,65 @@
+import { UserDto } from './dto/user.dto';
 import {
   CreateUserInput,
-  UpdateUserInput,
-  DeleteUserInput,
-} from './dto/user.input.dto';
-import { GetUserArgs, GetUsersArgs } from './dto/user.args.dto';
+  // UpdateUserInput,
+  // DeleteUserInput,
+} from './dto/user.input';
+import { GetUserArgs, GetUsersArgs } from './dto/user.args';
 import { UsersService } from './users.service';
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
-import { User } from './entities/user.entity';
+import { User } from './schema/user.schema';
+// import { User as UserDB, UserDocument } from './schemas/user.schema';
 
 @Resolver(() => User)
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
-  @Query(() => User, { name: 'user', nullable: true })
-  getUser(@Args() getUserArgs: GetUserArgs): User {
-    return this.usersService.getUser();
+  @Query(() => User, { name: 'findUser', nullable: true })
+  async getUser(@Args() getUserArgs: GetUserArgs): Promise<User> {
+    return await this.usersService.findOne(getUserArgs);
   }
 
-  @Query(() => [User], { name: 'user', nullable: 'items' })
-  getUsers(@Args() getUsersArgs: GetUsersArgs): User[] {
-    return this.usersService.getUsers();
+  @Query(() => [User], { name: 'findUsers', nullable: 'items' })
+  async getUsers(@Args() getUsersArgs: GetUsersArgs): Promise<User[]> {
+    return await this.usersService.find(getUsersArgs);
   }
 
-  @Mutation(() => User)
-  createUser(@Args('createUserData') createUserData: CreateUserInput): User {
-    return this.usersService.createUser();
+  // @Mutation(() => User)
+  // async createUser(
+  //   @Args('createUserData') createUserData: CreateUserInput,
+  // ): Promise<UserDto> {
+  //   return await this.usersService.create(createUserData);
+  // }
+  @Mutation(() => UserDto)
+  async createUser(@Args('input') input: CreateUserInput): Promise<UserDto> {
+    return this.usersService.create(input);
   }
 
-  @Mutation(() => User)
-  updateUser(@Args('updateUserData') updateUserData: UpdateUserInput): User {
-    return this.usersService.updateUser();
-  }
+  // @Mutation(() => Company)
+  // async companyCreate(
+  //   @Args('input') input: CreateCompanyInput,
+  //   @Context('req') context: RequestWithUser,
+  // ) {
+  //   return this.companyService.create(input, context);
+  // }
 
-  @Mutation(() => User)
-  deleteUser(@Args('deleteUserData') deleteUserData: DeleteUserInput): User {
-    return this.usersService.deleteUser();
-  }
+  // @Query(() => [User], { name: 'users', nullable: 'items' })
+  // getUsers(@Args() getUsersArgs: GetUsersArgs): User[] {
+  //   return this.usersService.getUsers(getUsersArgs);
+  // }
+
+  // @Mutation(() => User)
+  // createUser(@Args('createUserData') createUserData: CreateUserInput): User {
+  //   return this.usersService.createUser(createUserData);
+  // }
+
+  // @Mutation(() => User)
+  // updateUser(@Args('updateUserData') updateUserData: UpdateUserInput): User {
+  //   return this.usersService.updateUser(updateUserData);
+  // }
+
+  // @Mutation(() => User)
+  // deleteUser(@Args('deleteUserData') deleteUserData: DeleteUserInput): User {
+  //   return this.usersService.deleteUser(deleteUserData);
+  // }
 }

@@ -1,5 +1,6 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, ID, InputType } from '@nestjs/graphql';
 import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { ObjectId } from 'mongoose';
 
 @InputType()
 export class CreateUserInput {
@@ -16,22 +17,22 @@ export class CreateUserInput {
 
 @InputType()
 export class UpdateUserInput {
-  @Field()
+  @Field(() => ID)
   @IsNotEmpty()
-  userId: string;
+  _id: ObjectId;
 
   @Field()
   @IsOptional()
   name?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isSubscribed?: boolean;
 }
 
 @InputType()
 export class DeleteUserInput {
-  @Field()
+  @Field(() => ID)
   @IsNotEmpty()
-  userId: string;
+  _id: ObjectId;
 }

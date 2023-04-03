@@ -1,0 +1,31 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  _id: ID!
+  name: String!
+  email: String!
+  isSubscribed: Boolean!
+}
+
+type UserDto {
+  _id: ID!
+  name: String!
+  email: String!
+  isSubscribed: Boolean!
+}
+
+type Query {
+  findUser(_id: ID!): User
+  findUsers(Ids: [ID!]!): [User]!
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): UserDto!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+}
