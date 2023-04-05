@@ -19,10 +19,10 @@ import { NoteModule } from './note/note.module';
       isGlobal: true,
     }),
     UserModule,
+    NoteModule,
     MongooseModule.forRoot(
       `${process.env.MONGODB_PROTOCOL}://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_CLUSTER}/${process.env.MONGODB_DATABASE}`,
     ),
-    NoteModule,
   ],
 })
 export class AppModule {}

@@ -5,9 +5,9 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
-  app.listen(3000, () =>
+  app.listen(process.env.PORT || 3000, () =>
     console.log(
-      ' ✅ Success! Server started on http://localhost:3000/graphql 🚀',
+      `✅ Success! Server started on port ${process.env.PORT || 3000} 🚀`,
     ),
   );
 }
