@@ -5,10 +5,10 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
-  app.listen(3000, () =>
-    console.log(
-      ' ✅ Success! Server started on http://localhost:3000/graphql 🚀',
-    ),
+  const port = process.env.PORT || 8080;
+  const hostUrl = process.env.HOST_URL || 'http://localhost';
+  app.listen(port, () =>
+    console.log(`✅ Success! Server started on ${hostUrl}:${port}/graphql 🚀`),
   );
 }
 bootstrap();
