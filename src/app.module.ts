@@ -12,6 +12,7 @@ import { NoteModule } from './note/note.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
+      introspection: true,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
