@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Schema } from 'mongoose';
-
 import { User, UserDocument } from './model/user.model';
 import { CreateUserInput, UpdateUserInput } from './dto/user.input';
 
@@ -26,10 +25,6 @@ export class UserService {
   findByUsername(username: string) {
     return this.userModel.findOne({ username: username }).exec();
   }
-
-  // list(filters: ListPersonInput) {
-  //     return this.userModel.find({...filters}).exec();
-  // }
 
   update(payload: UpdateUserInput) {
     return this.userModel
